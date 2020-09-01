@@ -1,0 +1,51 @@
+/* header{
+    background-color: aqua;
+}
+main{
+    background-color: bisque;
+}
+footer{
+    background-color: blueviolet;
+} */
+
+.card {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 3fr 1fr;
+
+    background-color: #ddd;
+
+    width: 200px;
+    height: 324px;
+
+    padding: 15px;
+}
+
+.card header, main, footer{
+    display: grid;
+
+    justify-items: center;
+    text-align: center;
+    align-content: center;
+}
+.card h1 {
+    padding: 0;
+    margin: 0;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: 3px;
+}
+.card footer h1{
+    font-weight: 300;
+    font-size: 24px;
+    letter-spacing: 4px;
+}
+.card footer strong{
+    letter-spacing: 2px;
+    font-weight: 900;
+}
+
+.card .char_fullBody{
+    width: 120px;
+}
