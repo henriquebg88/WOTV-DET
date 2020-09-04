@@ -10,6 +10,10 @@ footer{
 
 .card {
     display: grid;
+    justify-items: center;
+    text-align: center;
+    align-content: center;
+
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 3fr 1fr;
 
@@ -19,15 +23,9 @@ footer{
     height: 324px;
 
     padding: 15px;
+    margin: 5px;
 }
 
-.card header, main, footer{
-    display: grid;
-
-    justify-items: center;
-    text-align: center;
-    align-content: center;
-}
 .card h1 {
     padding: 0;
     margin: 0;
@@ -46,6 +44,13 @@ footer{
     font-weight: 900;
 }
 
-.card .char_fullBody{
+div.char img{
+    width: 120px;
+}
+div.equip img{
+    width: 120px;
+}
+
+img.equip{
     width: 120px;
 }

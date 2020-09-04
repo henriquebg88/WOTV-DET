@@ -1,21 +1,20 @@
 import React from 'react';
 
-import char_fullBody from '../../../assets/shadowlynxs_fullbody.png'
+import img_char_fullBody from '../../../assets/shadowlynx_fullbody.png'
 
-import './card.css'
 
 const Card_Char = () => {
     return (
-        <div className="card">
-            <header>
+        <div className="card char">
+            <div>
                 <h1>Shadowlynxs</h1>
-            </header>
-            <main>
-                <img className='char_fullBody' src='https://wotv-calc.com/assets/units/lapssdlx.png' alt=""/>
-            </main>
-            <footer>
+            </div>
+            <div>
+                <img src={img_char_fullBody} alt=""/>
+            </div>
+            <div>
                 <h1>Evasion: <strong>188</strong></h1> 
-            </footer>
+            </div>
         </div>
     )
 };

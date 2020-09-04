@@ -1,18 +1,17 @@
 *{
   font-family: 'Roboto', sans-serif;
+  padding: 0;
+  margin: 0;
 }
-
+.container{
+  display: flex;
+  padding: 20px;
+}
 .field-group{
   display: flex;
 }
-
 li {
   list-style: none;
 }
 
-.subjob{
-  background: url(https://wotv-calc.com/base_sub.dc5ae2b74f2b6802bf7b.png) 0 0 no-repeat;
-  background-size: 40px;
-  width: 40px;
-}
 
