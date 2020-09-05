@@ -54,3 +54,11 @@ div.equip img{
 img.equip{
     width: 120px;
 }
+
+.char div:nth-child(3){
+    margin: auto;
+}
+.char div:nth-child(3) h1{
+    font-size: 24px;
+    font-weight: 300;
+}
