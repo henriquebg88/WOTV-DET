@@ -7,7 +7,6 @@ import CardStatus from './components/Card_Status';
 
 import './styles.css';
 import './components/card.css';
-
 interface unitDatabase {
     items: [{
         iname: string,
