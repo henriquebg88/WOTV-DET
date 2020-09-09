@@ -34,6 +34,19 @@ footer{
     font-size: 16px;
     letter-spacing: 3px;
 }
+.card p{
+    font-weight: 300;
+    font-size: smaller;
+}
+.card legend{
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: small;
+    margin-bottom: 6px;
+}
+.card .skills .field-inline{
+    text-align: left;
+}
 .card footer h1{
     font-weight: 300;
     font-size: 24px;
@@ -50,9 +63,9 @@ div.char img{
 div.equip img{
     width: 120px;
 }
-
-img.equip{
-    width: 120px;
+div.skills img{
+    width: 50px;
+    margin-right: 10px;
 }
 
 .char div:nth-child(3){
@@ -62,3 +75,4 @@ img.equip{
     font-size: 24px;
     font-weight: 300;
 }
+
