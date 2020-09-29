@@ -7,53 +7,101 @@ import CardStatus from './components/Card_Status';
 
 import './styles.css';
 import './components/card.css';
-import { Console } from "console";
 
-interface unitDatabase {
-    items: [{
-        iname: string,
-        charaId: string,
-        rare: number,
-        type: number,
-        elem: number[],
-        jobsets: string[],
-        piece: string,
-        status: [
-            {},
-            {
-                hp: number,
-                dex: number,
-                atk: number,
-                def: number,
-                mag: number,
-                spd: number,
-                mov: number,
-                jmp: number,
-                luk: number,
-                ap: number
-            }
-        ]
-
-    }];
-}
-interface unitName {
-    infos:
-    [
+interface unitDatamine {
+    iname: string,
+    hero: number,
+    sex: number,
+    size: number,
+    body_type: string,
+    personal: number,
+    charaId: string,
+    anm_type: number,
+    voiceId: string,
+    type: number,
+    elem: number[],
+    species: number[],
+    birth: number,
+    rare: number,
+    grow: string,
+    cost: number,
+    piece: string,
+    piece_num: number,
+    db_num: number,
+    trust: string,
+    atkskl: string,
+    mstskl: string[],
+    jobsets: string[],
+    ai: string,
+    buff_pri: string,
+    debuff_pri: string,
+    status: [
         {
-            key: string,
-            value: string
+            hp: number,
+            mp: number,
+            ap: number,
+            atk: number,
+            def: number,
+            mag: number,
+            mnd: number,
+            dex: number,
+            spd: number,
+            luk: number,
+            ewi: number,
+            eth: number,
+            asl: number,
+            api: number,
+            abl: number,
+            ash: number,
+            ama: number,
+            cpo: number,
+            csl: number,
+            cpa: number,
+            ccf: number,
+            cch: number,
+            mov: number,
+            jmp: number,
+            dmax: number
+        },
+        {
+            hp: number,
+            mp: number,
+            ap: number,
+            atk: number,
+            def: number,
+            mag: number,
+            mnd: number,
+            dex: number,
+            spd: number,
+            luk: number,
+            ewi: number,
+            eth: number,
+            asl: number,
+            api: number,
+            abl: number,
+            ash: number,
+            ama: number,
+            cpo: number,
+            csl: number,
+            cpa: number,
+            ccf: number,
+            cch: number,
+            mov: number,
+            jmp: number,
+            dmax: number
         }
-    ]
+    ],
+    limit: string,
+    awake_tbl_id: string
 }
-interface unitNameData {
-    key: string,
-    value: string
+interface unitDatamineArray{
+    items: unitDatamine[]
 }
-interface units {
-    items: []
-}
+
 
 const Evade = () => {
+
+    const [wotvUnits, set_wotvUnits] = useState<unitDatamine[]>([]);
 
     useEffect(() => {
         // https://raw.githubusercontent.com/shalzuth/wotv-ffbe-dump/master/data/Unit.json
@@ -68,46 +116,11 @@ const Evade = () => {
         // })
 
 
-        axios.get<unitDatabase>('https://raw.githubusercontent.com/shalzuth/wotv-ffbe-dump/master/data/Unit.json').then(response => {
-
-            const units: object[] = [];
-            const teste: any[] = [1, 2, 3, 5, 3, 56, 435];
-
-            //Get unit name using KEY                
-            response.data.items.map( item => {
-                //type 0 seems to refer to playable units
-                if (item.piece) {
-
-                    axios.get<unitName>('https://raw.githubusercontent.com/shalzuth/wotv-ffbe-dump/master/en/UnitName.json').then( response => {
-                        //Push esta indo depois de o array ser contabilizado??
-                        //Push esta indo depois de o array ser contabilizado??
-                        //Push esta indo depois de o array ser contabilizado??
-                        //Push esta indo depois de o array ser contabilizado??
-                        //Push esta indo depois de o array ser contabilizado??
-                        teste.push(1);
-                    })
-
-
-
-
-                }
-
-            });
-
-            console.log(units);
-            console.log(units.length)
-
-            units.map(() => {
-                console.log("oi");
-            })
-
-            console.log(teste);
-            teste.map(numero => {
-                console.log(numero)
-            })
-
-
+        const teste = axios.get<unitDatamineArray>('https://raw.githubusercontent.com/shalzuth/wotv-ffbe-dump/master/data/Unit.json').then( response => {
+  
+            return await response.data.items;
         })
+        set_wotvUnits(teste);
 
     }, [])
 
