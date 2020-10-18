@@ -8,7 +8,15 @@ import CardStatus from './components/Card_Status';
 import './styles.css';
 import './components/card.css';
 
-interface unitDatamine {
+interface unitName {
+    key: string,
+    value: string
+}
+interface unitNameArray {
+    infos: unitName[]
+}
+
+interface unitData {
     iname: string,
     hero: number,
     sex: number,
@@ -94,44 +102,81 @@ interface unitDatamine {
     limit: string,
     awake_tbl_id: string
 }
-interface unitDatamineArray{
-    items: unitDatamine[]
+interface unitDataArray {
+    items: unitData[]
 }
 
+// https://raw.githubusercontent.com/shalzuth/wotv-ffbe-dump/master/data/Unit.json
+// https://raw.githubusercontent.com/shalzuth/wotv-ffbe-dump/master/en/UnitName.json
+// https://raw.githubusercontent.com/shalzuth/wotv-ffbe-dump/master/en/JobName.json
 
 const Evade = () => {
 
-    const [wotvUnits, set_wotvUnits] = useState<unitDatamine[]>([]);
+    const [unitName, set_unitName] = useState<unitName[]>([]);
+    const [unitData, set_unitData] = useState<unitData[]>([]);
+    //Guardar nomes das unidades por suas chaves
 
     useEffect(() => {
-        // https://raw.githubusercontent.com/shalzuth/wotv-ffbe-dump/master/data/Unit.json
-        // https://raw.githubusercontent.com/shalzuth/wotv-ffbe-dump/master/en/UnitName.json
-        // https://raw.githubusercontent.com/shalzuth/wotv-ffbe-dump/master/en/JobName.json
 
-        // NOME DAS UNIDADES POR CHAVE
-        // axios.get<unitName>('https://raw.githubusercontent.com/shalzuth/wotv-ffbe-dump/master/en/UnitName.json').then( response => {
-        //     console.log(response.data.infos.map( data => {
-        //         console.log(data);
-        //     }));
-        // })
+        //Pega os dados das unidades e insere somente os com tipo "0" (Personagens jogáveis?)
+        axios
+            .get<unitDataArray>('https://raw.githubusercontent.com/shalzuth/wotv-ffbe-dump/master/data/Unit.json')
+            .then(response => {
+                console.log(response.data.items);
+                const unitsData: unitData[] = [];
 
+                response.data.items.map(item => {
+                    if (item.type == 0) {
+                        unitsData.push(item)
+                    }
+                })
 
-        const teste = axios.get<unitDatamineArray>('https://raw.githubusercontent.com/shalzuth/wotv-ffbe-dump/master/data/Unit.json').then( response => {
-  
-            return await response.data.items;
-        })
-        set_wotvUnits(teste);
+                set_unitData(unitsData);
+            })
+
+        //Pega a lista de nomes referenciados pela Key    
+        axios
+            .get<unitNameArray>('https://raw.githubusercontent.com/shalzuth/wotv-ffbe-dump/master/en/UnitName.json')
+            .then(response => {
+                const unitNames = response.data.infos.map(unitName => unitName);
+                set_unitName(unitNames);
+            })
+
 
     }, [])
+
+    useEffect(() => {
+
+    }, []);
+
+
 
     return (
         <div id="page-evade">
             <main>
                 <h1>Página de teste</h1>
                 <div className="container">
-                    <Card_Char />
+                    {/* <Card_Char />
                     <Card_EquipsAndSkills />
-                    <CardStatus />
+                    <CardStatus /> */}
+                    <ul>
+                        {unitData.map(unit => (
+                            <li>
+                                <h3>
+                                    {unitName.find(unitName => unitName.key == unit.iname)?.value}
+                                </h3>
+                                <p>HP: {unit.status[1].hp}</p>
+                                <p>ATK: {unit.status[1].atk}</p>
+                                <p>DEF: {unit.status[1].def}</p>
+                                <p>Luck: {unit.status[1].luk}</p>
+                                <p>AGI: {unit.status[1].spd}</p>
+                                <p>Move: {unit.status[1].mov}</p>
+                                <p>Jump: {unit.status[1].jmp}</p>
+                            </li>
+                        ))}
+                    </ul>
+
+
                 </div>
             </main>
         </div>
